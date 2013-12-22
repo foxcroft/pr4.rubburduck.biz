@@ -1,0 +1,142 @@
+#title
+{
+	text-align: center;
+	color: #FFAA11;
+}
+
+#patches
+{
+	font-size: 15px;
+	height: 30px;
+	width: 100%;
+}
+
+.patch
+{
+	width: 10px;
+	height: 10px;
+	margin-top: 5px;
+	margin-left: 20px;
+	margin-right: 10px;
+	float: left;
+}
+
+.square
+{
+	width: 50px;
+	height: 50px;
+	margin: 4px;
+	float: left;
+	color: #FFFFFF;
+	background-color: #FFFF11;
+	font-family:Verdana, Geneva, sans-serif;
+	text-align: center;
+	vertical-align: 50%;
+	border-radius: 20px;
+}
+
+.dead
+{
+	width: 50px;
+	height: 50px;
+	margin: 4px;
+	float: left;
+	color: #FFFFFF;
+	font-family:Verdana, Geneva, sans-serif;
+	text-align: center;
+	vertical-align: 50%;
+	border-radius: 20px;
+}
+
+.column
+{
+	position: relative;
+}
+
+.col_content
+{
+	position: absolute;
+	bottom: 0;
+}
+
+.row
+{
+	line-height: 50px;
+}
+
+#message {
+	font-family: Courier;
+	color: #FF3333;
+	text-align: center;
+}
+
+button {
+	color: blue;
+}
+
+#buttons {
+	margin-left: 55px;
+	width: 380px;
+	text-align: center;
+}
+
+input[type=button] {
+  background-color: #CC88FF;
+  border: 1px solid #CC88FF;
+  border-radius: 5px;
+  color: #fff;
+  font: bold 11px/1 Tahoma, Geneva, sans-serif;
+  padding: 5px 0 5px 0;
+  position:relative;
+  top:-4px;
+  text-align: center;
+  width: 115px;
+}
+
+#frame {
+	width: 1000px;
+	height: 900px;
+	margin: 0px auto;
+	border: 1px solid white;
+	clear: both;
+	padding-bottom: 100px;
+}
+
+#board {
+	width: 500px;
+	margin-left: 25px;
+	margin-right: 25px;
+	float: left;
+}
+
+#stats {
+	width: 400px;
+	float: left;
+}
+
+#endform {
+	clear: both;
+}
+
+#duck_number
+{
+	width: 70%;
+	height: 42px;
+	float: left;
+	padding-right: 10px;
+}
+
+#ducks_left
+{
+	height: 42px;
+	color: #99FF11;
+	font-weight: bold;
+	font-size: 35px;
+	text-align: left;
+}
+
+#badelynge_hit
+{
+	color: #33CCFF;
+}
+
