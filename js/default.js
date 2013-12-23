@@ -1,5 +1,5 @@
-var grid_width = 7;
-var grid_height = 7;
+var grid_width = 8;
+var grid_height = 8;
 var grid_size = grid_height * grid_width;
 
 
@@ -35,52 +35,20 @@ change_timer.set({time: 3000, autostart: false});
 
 
 // start afresh, reload the page
-$('#start').click(function() {
+$('#restart').click(function() {
 	location.reload();
 });
 
-//reveal all of the duck locations
-$('#reveal').click(function() {
-
-	// if (ducks_hidden == "FALSE") {
-	// 	$('#message').css("color", "#FF3333");
-	// 	$('#message').html("You haven't hidden them yet...");
-	// }
-	// reveal_ducks();
-
-	console.log("REVEAL clicked");
-	duck_timer.play();
-	change_timer.play();
-
-});
-
-// show the location of all the ducks hidden among the available squares
-function reveal_ducks() {
-
-	// check each square to see if it has the 'target' class
-	for (var i = 0; i < grid_height; i++) {
-		
-		for (var j = 1; j <= grid_width; j++) {
-			var square_id = '#' + row_array[i] + j;
-
-			if($(square_id).hasClass("target")) {
-				var square_class = $(square_id).attr('class');
-				var bg_color = grab_color(square_class);
-				
-				$('#' + row_array[i] + j).css('background-color', bg_color);
-			}
-
-		}
-
-	}
-
-}
 
 // add duck class to certain squares
 $('#suit').click(function() {
 	$('#message').html('&nbsp;');
 
-	if (game_lost == "TRUE") {
+	if(ducks_suited == "TRUE") {
+		$('#message').css("color", "red");
+		$('#message').html("C'mon, look: they're already suited! Now START timer!");
+	}
+	else if (game_lost == "TRUE") {
 		$('#message').css("color", "black");
 		$('#message').html("Sorry Charly, you lost.");
 	}
@@ -93,7 +61,21 @@ $('#suit').click(function() {
 		$('#message').css("color", "black");
 		$('#message').html("OK, the ducks have chosen colors!");
 	}
+
+	$('#suit').css("box-shadow", "0px 0px 0px #000");
+	$('#start_timer').css("box-shadow", "0px 0px 10px #FFAA11");
 });
+
+
+//reveal all of the duck locations
+$('#start_timer').click(function() {
+
+	console.log("REVEAL clicked");
+	duck_timer.play();
+	change_timer.play();
+
+});
+
 
 function set_colors() {
 
@@ -116,92 +98,6 @@ function set_colors() {
 			}
 		}
 	}
-}
-
-//hide the ducks based on the index in the duck_array
-function hide_ducks(badelynge_index) {
-
-	// determine whether to place the duck horizontally or vertically
-	var orientation = Math.floor( (Math.random() * 2) );
-
-	var chain_length = duck_array[badelynge_index];
-	var duck_color = color_array[badelynge_index];
-
-	// if orientation generates to 0, place ducks horizontally.
-	if (orientation == 0) {
-		horizontal_duck(chain_length, duck_color);
-	}
-	else if (orientation == 1) {
-		vertical_duck(chain_length, duck_color);
-	}
-
-}
-
-
-// place a duck among available squares horizontally, if called upon to do so
-function horizontal_duck(chain_length, duck_color) {
-
-	// select the row
-	function set_row() {
-		var row_index = Math.floor( (Math.random() * grid_height) + 0);
-		var row = row_array[row_index];
-	
-		return row;
-	}
-
-	var row = set_row();
-	var row_open = "FALSE";
-
-
-	// determine how many squares are open
-	var open_squares = 0;
-
-	// evaluate whether the random row has enough available squares, otherwise switch it
-	while (row_open == "FALSE") {
-
-		for (var j = 1; j <= grid_width; j++) {
-			var square_class = $('#' + row + j).attr('class');
-			var is_a_duck = check_square(square_class);
-
-			if (is_a_duck == "NO") {
-				open_squares++;
-			}
-		}
-
-		// if there aren't even available squares to fit the full chain length,
-		// then randomly select a different row to test
-		if (open_squares < chain_length) {
-			row = set_row();
-			open_squares = 0;
-		}
-		else {
-			row_open = "TRUE";
-		}
-
-	}
-
-
-	// determine which squares it can start on
-	var start_range = open_squares - (chain_length - 1);
-
-	// randomly select the starting square
-	var start_square = Math.floor( (Math.random() * start_range) + 1 );
-
-	// set all the ducks down
-	for (var j = start_square; j < (start_square + chain_length) ; j++) {
-	
-		var square_class = $('#' + row + j).attr('class');
-
-		// if the square being checked doesn't already have a duck in it, set one down
-		if (check_square(square_class) == "NO") {
-			$('#' + row + j).removeClass("open").addClass("target").addClass(duck_color);
-		}
-		else {
-			start_square++;
-		}
-
-	}
-
 }
 
 
@@ -230,7 +126,7 @@ $('.square').click(function() {
 			
 			var redress = check_duck(duck_class);
 
-			// if it's a duck, grab the color from the array, otherwise set to red.
+			// if the duck doesn't change, make him disappear, otherwise set to red.
 			if (redress == "NO") {
 
 				$(this).css('background-color', hide_color);
@@ -244,8 +140,12 @@ $('.square').click(function() {
 			}
 			else {
 			
-				$(this).css('background-color', 'red');
-				strikes--;
+				$(this).css('background-color', 'red');				
+
+				if (--strikes == 0) {
+					stop_game();
+				}
+
 				console.log("Strikes at: " + strikes);
 			}
 
@@ -263,6 +163,18 @@ $('.square').click(function() {
 
 });
 
+// stop the program when something completes
+function stop_game() {
+	// show the form for submitting results
+	$('#endform').fadeToggle();
+	$('#duckies').val($('#ducks_left').val());
+	$('#board').css("opacity", "0.6");
+
+	//turn off the timers
+	duck_timer.stop();
+	change_timer.stop();
+};
+
 // check the square's classes to see if it contains 'target' (meaning a duck is hiding here)
 function check_duck(duck_class) {
 
@@ -278,12 +190,6 @@ function check_duck(duck_class) {
 		else {
 			return "YES";
 		}
-		// for (i in class_array) {
-		// 	if (class_array[i] == 'target') {
-		// 		is_a_duck = "YES";
-		// 		break;
-		// 	}
-		// }
 
 };
 

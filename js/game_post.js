@@ -6,6 +6,8 @@ var options = {
 	},
 	success: function(response) {
 		$('#end_results').html('Now everyone knows how you did.');
+		$('#post_reel').prepend(response);
+		$('#endform').delay(2000).fadeToggle();
 	}
 };
 

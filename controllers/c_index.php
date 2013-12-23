@@ -43,7 +43,8 @@ class index_controller extends base_controller {
                 created,
                 ducks_left,
                 time_elapsed,
-                strikes
+                strikes,
+                initials
             FROM games
             ORDER BY created DESC
             LIMIT 5';
@@ -65,6 +66,24 @@ class index_controller extends base_controller {
         $_POST['token']     = $POST['email'].Utils::generate_random_string();
 
         DB::instance(DB_NAME)->insert('users',$_POST);
+
+    }
+
+    public function p_update() {
+
+        $q = 'SELECT 
+                created,
+                ducks_left,
+                time_elapsed,
+                strikes,
+                initials
+            FROM games
+            ORDER BY created DESC
+            LIMIT 5';
+
+        $games = DB::instance(DB_NAME)->select_rows($q);
+
+        $this->template->content->games = $games;
 
     }
 	

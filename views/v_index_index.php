@@ -23,22 +23,6 @@
 
 	<br>
 	<div id="title"><h1>DUCKS OF A DIFFERENT COLOUR</h1></div>
-	
-	<div id="patches">
-		<div style="float: left; margin-left: 200px; margin-right: 20px;">COLOR KEY:: </div>
-		<div class="patch" style="background-color: #FFFF11"></div>
-		<div style="float: left;">HIDING SPOT</div>
-		<div class="patch" style="background-color: #FF3333"></div>
-		<div style="float: left;">NO DUCKS</div>
-		<div class="patch" style="background-color: #CC88FF"></div>
-		<div style="float: left;">2-DUCK CHAIN</div>
-		<div class="patch" style="background-color: #99FF11"></div>
-		<div style="float: left;">3-DUCK CHAIN</div>
-		<div class="patch" style="background-color: #33CCFF"></div>
-		<div style="float: left;">4-DUCK CHAIN</div>
-		<div class="patch" style="background-color: #FFAA11"></div>
-		<div style="float: left;">5-DUCK CHAIN</div>
-	</div>
 
 	<div id="frame">
 		
@@ -54,19 +38,11 @@
 
 				<!-- Set buttons for starting and hiding -->
 				<div id="buttons">
-					<input type='button' id='start' value='START OVER'>
+					<input type='button' id='restart' value='START OVER'>
 					<input type='button' id='suit' value='GET SUITED!'>
-					<input type='button' id='reveal' value='START TIMER'>
+					<input type='button' id='start_timer' value='START TIMER'>
 				</div>
-				<a href="/users/signup">SIGN UP</a>
 			</div>
-			<!-- 
-			<div class="square open" id="e1"></div>
-			<div class="square open" id="e2"></div>
-			<div class="square open" id="e3"></div>
-			<div class="square open" id="e4"></div>
-			<div class="square open" id="e5"></div>
-			-->
 
 	 	</div>
 
@@ -94,9 +70,9 @@
 			<div id="badelynge_hit"></div>
 		</div>
 
-		<div id="endform">
+		<div id="endform" style="display: none;">
 			<div>
-				How did you do?
+				<div style="text-align:center; font-size: 24px;">HOW DID YOU DO?</div><br>
 				<form id="end_form">
 					<label for='ducks'>Ducks left</label>
 					<input type='text' id='duckies' name='ducks_left'>
@@ -104,19 +80,26 @@
 					<input type='text' id='strikies' name='strikes'>
 					<label for='time'>Party Timer</label>
 					<input type='text' id='timies' name='time_elapsed'>
+					<label for='initials'>Your Initials</label>
+					<input type='text' id='inities' name='initials' maxlength="3">
 					<input type='submit' value='POST UP!'>
 				</form>
 			</div>
-			<div id="end_results">END RESULTS</div><br><br>
+			<div id="end_results">&nbsp;</div>
+		</div><br><br>
 
-			<div id="post_reel">POST REEL<br>
+		<div id="posting">
+			<br>
+			<h2>POST REEL</h2>
+			<div id="post_reel"><br>
 				<?php foreach($games as $game): ?>
 
+					<div style="font-size: 22px; text-transform:uppercase;"><?=$game['initials']?></div>
 					<?php $game_time = Time::display($game['created']);?>
 					<span id="game_time"><?php echo $game_time;?></span><br>
 
-					<span id="ducksleft"><strong>Ducks left: <?=$game['ducks_left']?></strong>:::
-					Elapsed Time: <?=$game['time_elapsed']?></span>:::
+					<span id="ducksleft"><strong>Ducks left: <?=$game['ducks_left']?></strong>&nbsp;&nbsp;&nbsp;
+					Time: <?=$game['time_elapsed']?></span>&nbsp;&nbsp;&nbsp;
 
 					Strikes: <?=$game['strikes']?>
 					<br><br>

@@ -15,9 +15,39 @@ class users_controller extends base_controller {
 
         DB::instance(DB_NAME)->insert('games',$_POST);
 
-        echo "Now everyone knows how you did";
+
+// beginning of section I'm adding in to see if it will work
+        $crtd = $_POST['created'];
+        $crtd = Time::display($crtd);
+        $dkslft = $_POST['ducks_left'];
+        $tmlpsd = $_POST['time_elapsed'];
+        $strks = $_POST['strikes']; 
+        $intls = $_POST['initials'];
+
+        $q = 'SELECT 
+                created,
+                ducks_left,
+                time_elapsed,
+                strikes
+            FROM games
+            ORDER BY created DESC
+            LIMIT 1';
+
+
+        $games = DB::instance(DB_NAME)->select_rows($q);
+
+        $new_div = "<div style='font-size: 22px; text-transform:uppercase;''>".$intls."</div>
+                <span id='game_time'>".$crtd."</span><br>
+                <span id='ducksleft'><strong>Ducks left: ".$dkslft.
+                "</strong>   Time: ".$tmlpsd."</span>   Strikes: ".$strks."<br>";
+// this is the end of the section I mean
+
+
+        echo $new_div;
     }
 
+
+/*
     public function signup($error = NULL) {
 
 
@@ -213,5 +243,6 @@ class users_controller extends base_controller {
         echo $this->template;
         
     }
+*/
 
 } # end of the class
