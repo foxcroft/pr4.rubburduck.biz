@@ -27,7 +27,7 @@
 	<div id="frame">
 		
 		<div id="board">
-			<div>
+			<div id="game_board">
 				<?php include 'squares.php'; ?>
 			</div>
 
@@ -70,6 +70,7 @@
 			<div id="badelynge_hit"></div>
 		</div>
 
+		<div style="clear: both;">&nbsp;</div>
 		<div id="endform" style="display: none;">
 			<div>
 				<div style="text-align:center; font-size: 24px;">HOW DID YOU DO?</div><br>
