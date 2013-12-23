@@ -12,6 +12,9 @@ class users_controller extends base_controller {
     public function p_post() {
         #set up the data
         $_POST['created']   = Time::now();
+        if ($_POST['strikes'] > 3) {
+            $_POST['strikes'] = 3;
+        }
 
         DB::instance(DB_NAME)->insert('games',$_POST);
 
@@ -36,10 +39,10 @@ class users_controller extends base_controller {
 
         $games = DB::instance(DB_NAME)->select_rows($q);
 
-        $new_div = "<div style='font-size: 22px; text-transform:uppercase;''>".$intls."</div>
+        $new_div = "<br><div style='font-size: 24px; text-transform:uppercase;''>".$intls."</div>
                 <span id='game_time'>".$crtd."</span><br>
                 <span id='ducksleft'><strong>Ducks left: ".$dkslft.
-                "</strong>   Time: ".$tmlpsd."</span>   Strikes: ".$strks."<br>";
+                "&nbsp;&nbsp;&nbsp;&nbsp;</strong>Time: ".$tmlpsd."</span>&nbsp;&nbsp;&nbsp;&nbsp;Strikes: ".$strks."<br>";
 // this is the end of the section I mean
 
 

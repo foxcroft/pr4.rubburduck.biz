@@ -96,7 +96,7 @@ input[type=submit]
 
 #frame {
 	width: 1000px;
-	height: 1000px;
+	min-height: 1000px;
 	margin: 0px auto;
 	clear: both;
 	padding-bottom: 100px;
@@ -122,12 +122,17 @@ input[type=submit]
 	box-shadow: 0px 0px 10px #FFFF11;
 }
 
+#end_results
+{
+	text-align: center;
+}
+
 #duck_number
 {
 	width: 70%;
 	height: 42px;
 	float: left;
-	padding-right: 10px;
+	padding-right: 0px;
 }
 
 #ducks_left
@@ -137,6 +142,7 @@ input[type=submit]
 	font-weight: bold;
 	font-size: 35px;
 	text-align: left;
+	margin-left: 20px;
 }
 
 #posting

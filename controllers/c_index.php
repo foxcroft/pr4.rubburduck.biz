@@ -47,7 +47,7 @@ class index_controller extends base_controller {
                 initials
             FROM games
             ORDER BY created DESC
-            LIMIT 5';
+            LIMIT 10';
 
         $games = DB::instance(DB_NAME)->select_rows($q);
 
