@@ -4,7 +4,7 @@ var grid_size = grid_height * grid_width;
 
 
 var ducks_suited = "FALSE";
-var strikes = 3;
+var strikes = 5;
 var game_lost = "FALSE";
 var pend_post = "FALSE";
 var hide_color = '#EEEFFF';
@@ -30,7 +30,7 @@ $('#party_timer').html(party_time);
 var duck_timer = $.timer(function() {
 	$('#party_timer').html(++party_time);
 
-	if (++wait_time >= 3 && wait_time < 6) {
+	if (++wait_time >= 2 && wait_time < 6) {
 		$('#game_board').css({'opacity':'1', 'color':'black'});
 		$('#message').html('OK, catch the rule-breakers!');
 	}
@@ -41,7 +41,7 @@ duck_timer.set({time: 1000, autostart: false});
 var change_timer = $.timer(function() {
 	set_colors();
 });
-change_timer.set({time: 3000, autostart: false});
+change_timer.set({time: 2000, autostart: false});
 
 
 // start afresh, reload the page
@@ -146,7 +146,7 @@ $('.square').click(function() {
 		$('#message').css({"color":"black", "font-weight":"bold"});
 		$('#message').html("You found them first! All the ducks are safe.<br>You can cuddle them in your backyard.");
 	}
-	else if (wait_time < 3) {}
+	else if (wait_time < 2) {}
 	else if ($(this).attr("class") == 'dead') {}
 
 	// otherwise, check to see if there is a duck in this hiding square
@@ -180,9 +180,13 @@ $('.square').click(function() {
 			$('#message').css("color", "black");
 			$('#message').html("Oof, not that one");
 		
+			my_ducks--;
+			$('#ducks_left').html(my_ducks);
+
 			$(this).css('background-color', 'red');				
 
 			if (--strikes == 0) {
+				$('h1').html("YOU LOSE.");
 				stop_game();
 			}
 

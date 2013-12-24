@@ -32,13 +32,13 @@
 					It's one of those new parties you've been hearing about: ducks arrive
 					in their own clothes, and then at the party, they change!</div>
 				<div>These ducks have strict rules:
-					every 3 seconds, ducks must change clothes. Problem is, some are too
-					lazy to change every 3 seconds.<br>
+					every 2 seconds, ducks must change clothes. Problem is, some are too
+					lazy to change every 2 seconds.<br>
 					As chaperone of the duck party, it is your sworn duty to kick out
 					rule-breakers. If you see a duck wearing the same color outfit
 					two turns in a row, click him (or her) out!</div><br>
 				<div>Be careful not to click on a duck who obeyed the rules though. There's a 
-					three strike policy, after which, you'll be <em>fired.</em></div><br>
+					strict five strike policy, after which, you'll be <em>fired.</em></div><br>
 				<div>Click <strong>GET SUITED!</strong> to get all the ducks dressed up!
 					Then click START TIMER to start catching cheaters.</div><br>
 				<div>See how quickly you can catch them all cheating! <em>Everyone cheats eventually...</em></div><br>
